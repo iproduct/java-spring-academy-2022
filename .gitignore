@@ -1,3 +1,9 @@
+# Ignore Intellij IDEA config files and compile output
+.idea/
+*.iml
+out/
+
+
 .gradle
 /build/
 
