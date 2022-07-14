@@ -1,7 +1,9 @@
 import model.Person;
+import model.User;
 
 public class Main {
     public static void main(String[] args) {
+        // Persons demo
         Person p1 = new Person(1L, "John", "Doe", 35);
         System.out.println(p1);
         Person p2 = new Person(2L, "Jane", "Doe", 25);
@@ -14,5 +16,9 @@ public class Main {
         System.out.printf("Are p2.identityHashcode = %d and p3.identityHashcode = %d%n",
                 System.identityHashCode(p2), System.identityHashCode(p3));
         System.out.printf("Are p2 == p3? -> %b%n", p2 == p3);
+
+        // Users demo
+        Person u1 = new User(3L, "James", "Doe", 16, "james", "james123");
+        System.out.println("User 1: " + u1);
     }
 }
