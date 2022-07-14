@@ -1,26 +1,24 @@
-package model;
-
-import java.util.StringJoiner;
+package course.java.model;
 
 public class Person {
-    private static long nextId = 0L;
-    private Long id = 0L;
+    private Long id;
     private String firstName;
     private String lastName;
     private int age;
+    private String phone;
 
     public Person() {
     }
 
-    public Person(String firstName, String lastName, int age) {
+    public Person(String firstName, String lastName, int age, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        id = id + 1;
+        this.phone = phone;
     }
 
-    public Person(Long id, String firstName, String lastName, int age) {
-        this(firstName, lastName, age);
+    public Person(Long id, String firstName, String lastName, int age, String phone) {
+        this(firstName, lastName, age, phone);
         this.id = id;
     }
 
@@ -56,6 +54,14 @@ public class Person {
         this.age = age;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,11 +79,22 @@ public class Person {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", Person.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("firstName='" + firstName + "'")
-                .add("lastName='" + lastName + "'")
-                .add("age=" + age)
-                .toString();
+        final StringBuilder sb = new StringBuilder("Person{");
+        sb.append("id=").append(id);
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", age=").append(age);
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public String format() {
+        return String.format("| %3.3s | %-15.15s | %-15.15s | %-3d | %-15.15s |",
+                id, firstName, lastName, age, phone);
+    }
+
+    public String format(String format) {
+        return String.format(format, id, firstName, lastName, age, phone);
     }
 }

@@ -1,10 +1,12 @@
 import model.Person;
 import model.User;
+import model.builder.PersonBuilder;
 
 public class Main {
     public static void main(String[] args) {
         // Persons demo
-        Person p1 = new Person(1L, "John", "Doe", 35);
+        PersonBuilder pb = new PersonBuilder();
+        Person p1 = pb.setId(1L).setAge(35).setName("John Doe").build();
         System.out.println(p1);
         Person p2 = new Person(2L, "Jane", "Doe", 25);
         System.out.println(p2);
