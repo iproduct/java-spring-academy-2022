@@ -6,8 +6,6 @@ public class Person {
     private String lastName;
     private int age;
 
-    private String fullName;
-
     public Person() {
     }
 
