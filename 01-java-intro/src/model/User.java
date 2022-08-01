@@ -6,6 +6,8 @@ public class User extends Person {
     private String username;
     private String password;
 
+    private Role role = Role.READER;
+
     public User() {
     }
 
@@ -15,10 +17,24 @@ public class User extends Person {
         this.password = password;
     }
 
+    public User(String firstName, String lastName, int age, String username, String password, Role role) {
+        super(firstName, lastName, age);
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
     public User(Long id, String firstName, String lastName, int age, String username, String password) {
         super(id, firstName, lastName, age);
         this.username = username;
         this.password = password;
+    }
+
+    public User(Long id, String firstName, String lastName, int age, String username, String password, Role role) {
+        super(id, firstName, lastName, age);
+        this.username = username;
+        this.password = password;
+        this.role = role;
     }
 
     public String getUsername() {
@@ -37,6 +53,14 @@ public class User extends Person {
         this.password = password;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
@@ -46,6 +70,7 @@ public class User extends Person {
                 .add("age=" + getAge())
                 .add("username='" + username + "'")
                 .add("password='" + password + "'")
+                .add("role='" + role + "'")
                 .toString();
     }
 }
