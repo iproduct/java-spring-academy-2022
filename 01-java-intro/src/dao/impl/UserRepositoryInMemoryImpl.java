@@ -6,7 +6,7 @@ import model.User;
 
 import java.util.Optional;
 
-public class UserRepositoryInMemoryImpl extends RepositoryInMemoryImpl<Long, User> implements UserRepository {
+class UserRepositoryInMemoryImpl extends RepositoryInMemoryImpl<Long, User> implements UserRepository {
     public UserRepositoryInMemoryImpl(IdGenerator<Long> idGenerator) {
         super(idGenerator);
     }
