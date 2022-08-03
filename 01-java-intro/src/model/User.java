@@ -1,5 +1,7 @@
 package model;
 
+import dao.Identifiable;
+
 import java.util.StringJoiner;
 
 public class User extends Person {

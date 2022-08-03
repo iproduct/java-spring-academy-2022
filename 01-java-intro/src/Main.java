@@ -1,26 +1,27 @@
+import dao.UserRepository;
+import dao.impl.LongIdGenerator;
+import dao.impl.UserRepositoryInMemoryImpl;
 import model.Person;
+import model.Role;
 import model.User;
 import model.builder.PersonBuilder;
 
-public class Main {
-    public static void main(String[] args) {
-        // Persons demo
-        PersonBuilder pb = new PersonBuilder();
-        Person p1 = pb.setId(1L).setAge(35).setName("John Doe").build();
-        System.out.println(p1);
-        Person p2 = new Person(2L, "Jane", "Doe", 25);
-        System.out.println(p2);
-        System.out.printf("Are p1 and p2 equal? -> %b%n", p1.equals(p2));
-        Person p3 = new Person(2L, "Jane", "Doe", 26);
-        System.out.println(p2);
-        System.out.printf("Are p2 and p3 equal? -> %b%n", p2.equals(p3));
-        System.out.printf("Are p2.hashcode = %d and p3.hashcode = %d%n", p2.hashCode(), p3.hashCode());
-        System.out.printf("Are p2.identityHashcode = %d and p3.identityHashcode = %d%n",
-                System.identityHashCode(p2), System.identityHashCode(p3));
-        System.out.printf("Are p2 == p3? -> %b%n", p2 == p3);
+import java.util.List;
 
+public class Main {
+    public static final List<User> MOCK_USERS = List.of(
+            new User("James", "Doe", 16, "james", "james123", Role.ADMIN),
+            new User("Jane", "Doe", 16, "jane", "jane123", Role.AUTHOR),
+            new User("John", "Smith", 16, "john", "john123")
+    );
+    public static void main(String[] args) {
         // Users demo
-        Person u1 = new User(3L, "James", "Doe", 16, "james", "james123");
-        System.out.println("User 1: " + u1);
+        UserRepository userRepo = new UserRepositoryInMemoryImpl(new LongIdGenerator());
+        MOCK_USERS.forEach(userRepo::create);
+        userRepo.findAll().forEach(System.out::println);
+
+        // find user by username
+        var john = userRepo.findByUsername("john");
+        System.out.printf("User found: %s%n", john);
     }
 }

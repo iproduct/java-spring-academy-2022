@@ -1,8 +1,10 @@
 package model;
 
+import dao.Identifiable;
+
 import java.util.StringJoiner;
 
-public class Person {
+public class Person implements Identifiable<Long> {
     private static long nextId = 0L;
     private Long id = 0L;
     private String firstName;
