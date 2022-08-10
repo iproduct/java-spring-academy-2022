@@ -4,7 +4,7 @@ import java.util.stream.IntStream;
 
 public class StreamsDemo04 {
     public static void main(String[] args) {
-        int reducedParallel = IntStream.rangeClosed(1, 10000).boxed()
+        var reducedParallel = IntStream.rangeClosed(1, 10000).boxed()
                 .parallel()
                 .reduce(0, // initial value of accumulators
                         (a, b) -> a + b, // reducer

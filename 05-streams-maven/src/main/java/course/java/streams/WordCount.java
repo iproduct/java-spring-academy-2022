@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -33,10 +34,11 @@ public class WordCount {
     public static List<Map.Entry<String, Long>> findTopKeywords(String filename, int count) throws IOException{
         Path path = Path.of(filename);
         var wordCounts = Files.lines(path).flatMap(line ->
-            Arrays.stream(line.split("[\\s.?!:\\\\/\"\',;\\[\\]\\-\\d\\(\\)\\{\\}]+")))
+            Arrays.stream(line.split("[\\W]+")))
                 .filter(word -> word.length() > 2)
+                .map(String::toLowerCase)
                 .filter(not(STOP_WORDS::contains))
-                .collect(Collectors.groupingBy(String::toLowerCase, Collectors.counting()));
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         return wordCounts.entrySet().stream()
                 .sorted(Map.Entry.<String, Long>comparingByValue().reversed())

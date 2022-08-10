@@ -21,32 +21,39 @@ public class StreamApiDemo02 {
 //        empty.forEach(System.out::println);
         var streamOfVals = Stream.of("hello", "functional", "java", "stream", "api");
 //        streamOfVals.forEach(System.out::println);
-//        System.out.println();
+        System.out.println();
         var streamOfVals2 = createStream(List.of("hello", "functional", "java", "stream", "api"));
-//        streamOfVals2.forEach(System.out::println);
+        streamOfVals2.forEach(System.out::println);
+        System.out.println();
         var streamOfArrayVals =
                 Arrays.stream(new String[]{"hello", "functional", "java", "stream", "api"}, 1, 4);
-//        streamOfArrayVals.forEach(System.out::println);
+        streamOfArrayVals.forEach(System.out::println);
+        System.out.println();
         var streamBuilded = Stream.<String>builder().add("hello").add("functional")
                 .add("java").add("stream").add("api")
                 .build();
-//        streamBuilded.forEach(System.out::println);
-        var streamGenerated = Stream.generate(() -> Math.random()).limit(100).parallel();
+        streamBuilded.forEach(System.out::println);
+        System.out.println();
+        var streamGenerated = Stream.generate(() -> Math.random()).limit(20).parallel();
 //        streamGenerated.forEach(System.out::println);
+        System.out.println();
         var counter = new AtomicInteger();
         var countedRandoms = Stream.generate(
                         () -> new Tuple2(counter.incrementAndGet(), Math.random()))
                 .limit(100).parallel();
-//        countedRandoms.forEach(tuple2 -> System.out.printf("%s -> %s%n", tuple2.getV1(),tuple2.getV2()));
+        countedRandoms.forEach(tuple2 -> System.out.printf("%s -> %s%n", tuple2.getV1(),tuple2.getV2()));
+        System.out.println();
         var counterStream = IntStream.iterate(1, i -> i + 1).mapToObj(Integer::valueOf); //mapToObj(Integer::new);
 //        counterStream.forEach(System.out::println);
+        System.out.println();
         var countedRandomsZip =
                 StreamUtil.zip(counterStream, streamGenerated, (count, random) -> new Tuple2<>(count, random));
         countedRandomsZip.forEach(tuple2 -> System.out.printf("%s -> %s%n", tuple2.getV1(),tuple2.getV2()));
+        System.out.println();
 
-        // String stream
+//        // String stream
         var charsStream = streamOfVals.flatMapToInt(str -> str.chars());
-//        charsStream.forEach(ch -> System.out.print((char)ch + ", "));
+        charsStream.forEach(ch -> System.out.print((char)ch + ", "));
     }
 }
 

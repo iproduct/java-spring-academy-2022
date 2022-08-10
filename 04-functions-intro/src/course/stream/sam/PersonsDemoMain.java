@@ -24,20 +24,23 @@ public class PersonsDemoMain {
                         List.of(new Phone(WORK, "+(359) 2 345345"), new Phone(MOBILE, "+(44) 4534535")),
                         new Address("Sofia", "Hristo botev 54")),
                 new Person(4L, "Nadezda", "Petrova", 39, FEMALE, "npetrova@gmail.com",
-                    List.of(new Phone(WORK, "+(359) 2 345345"), new Phone(MOBILE, "+(44) 4534535"),
-                        new Phone(MOBILE, "+(1) 4534353535")),
+                        List.of(new Phone(WORK, "+(359) 2 345345"), new Phone(MOBILE, "+(44) 4534535"),
+                                new Phone(MOBILE, "+(1) 4534353535")),
                         new Address("Sofia", "Hristo botev 54"))
         );
         var personsByAge = new ArrayList<>(persons);
 //        personsByAge.sort(new Comparator<Person>() {
 //            @Override
 //            public int compare(Person p1, Person p2) {
-//                return Integer.compare(p1.getAge(), p2.getAge());
+//                return p1.getAge() == p2.getAge() ?
+//                        p1.getFirstName().compareToIgnoreCase(p2.getFirstName()) :
+//                        Integer.compare(p1.getAge(), p2.getAge());
 //            }
 //        });
-        personsByAge.sort((p1, p2) -> Integer.compare(p1.getAge(), p2.getAge()));
-        personsByAge.sort(Comparator.comparingInt(Person::getAge));
-        personsByAge.forEach(System.out::println);
+//        personsByAge.sort((p1, p2) -> Integer.compare(p1.getAge(), p2.getAge()));
+//        personsByAge.sort(Comparator.comparingInt(Person::getAge)
+//                .thenComparing(Comparator.comparing(Person::getFirstName)).reversed());
+//        personsByAge.forEach(System.out::println);
 
 //        var personsByCountryThenByFirstName = new ArrayList<>(persons);
 //        personsByCountryThenByFirstName.sort(
