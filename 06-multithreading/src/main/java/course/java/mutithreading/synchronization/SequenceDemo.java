@@ -16,7 +16,7 @@ class UnsafeSequence {
 }
 
 class SafeSequenceSynchronized { // pessimistic concurrency (exclusive locking)
-    private Integer nextId = 0;
+    private int nextId = 0;
     int getLastId() {
         //do other things here
         synchronized(this) {

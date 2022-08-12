@@ -30,8 +30,9 @@ class Waiter implements Runnable {
             Pizza pizza;
             while (!Thread.interrupted()) {
                 synchronized (restaurant) {
-                    while (restaurant.pizza == null)
+                    while (restaurant.pizza == null) {
                         restaurant.wait(); // ... for the chef to produce a meal
+                    }
                     pizza = restaurant.pizza;
                     restaurant.pizza = null;
                 }
