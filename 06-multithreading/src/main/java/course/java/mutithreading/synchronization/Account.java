@@ -1,8 +1,12 @@
 package course.java.mutithreading.synchronization;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Account {
     private String id;
     private long ballanceInCents;
+    private Lock lock = new ReentrantLock();
 
     public Account() {
     }
@@ -12,7 +16,7 @@ public class Account {
         this.ballanceInCents = ballanceInCents;
     }
 
-    synchronized public long getBallanceInCents() {
+    public long getBallanceInCents() {
         return ballanceInCents;
     }
 
@@ -20,7 +24,11 @@ public class Account {
         return id;
     }
 
-    synchronized public void setBallanceInCents(long ballanceInCents) {
+    public void setBallanceInCents(long ballanceInCents) {
         this.ballanceInCents = ballanceInCents;
+    }
+
+    public Lock getLock() {
+        return lock;
     }
 }
