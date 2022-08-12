@@ -16,12 +16,19 @@ class UnsafeSequence {
 }
 
 class SafeSequenceSynchronized { // pessimistic concurrency (exclusive locking)
-    private int nextId = 0;
-    synchronized int getLastId() {
-        return nextId;
+    private Integer nextId = 0;
+    int getLastId() {
+        //do other things here
+        synchronized(this) {
+            return nextId;
+        }
+        //do other things here
     }
-    synchronized int getNextId() {
-        return ++nextId;
+    int getNextId() {
+        //do other things here
+        synchronized(this) {
+            return ++nextId;
+        }
     }
 }
 
@@ -40,7 +47,7 @@ public class SequenceDemo{
     public static final int NUM_IDS = 1000000;
     public static void main(String[] args) throws InterruptedException {
 //        var sequence = new UnsafeSequence();
-        var sequence = new SafeSequenceSynchronized();
+        var sequence = new SafeSequenceSynchronized(); // pessimistic
 //        var sequence = new SafeSequenceAtomic();
 //        ExecutorService executor = Executors.newSingleThreadExecutor();
 //        ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
@@ -60,7 +67,7 @@ public class SequenceDemo{
             });
         }
 //        executor.shutdownNow();
-        Thread.sleep(3000);
+        Thread.sleep(10000);
         System.out.println(sequence.getLastId());
         shutdownAndAwaitTermination(executor);
     }
