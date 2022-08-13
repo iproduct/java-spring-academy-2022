@@ -3,14 +3,15 @@ package course.java.mutithreading.synchronization;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Account {
+public class AccountLocks {
     private String id;
     private long ballanceInCents;
+    private Lock lock = new ReentrantLock();
 
-    public Account() {
+    public AccountLocks() {
     }
 
-    public Account(String id, long ballanceInCents) {
+    public AccountLocks(String id, long ballanceInCents) {
         this.id = id;
         this.ballanceInCents = ballanceInCents;
     }
@@ -25,5 +26,9 @@ public class Account {
 
     public void setBallanceInCents(long ballanceInCents) {
         this.ballanceInCents = ballanceInCents;
+    }
+
+    public Lock getLock() {
+        return lock;
     }
 }

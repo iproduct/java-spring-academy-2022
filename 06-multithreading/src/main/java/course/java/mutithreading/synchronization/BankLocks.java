@@ -45,18 +45,18 @@ class ClientLocks implements Runnable {
 public class BankLocks {
     public static final long ACCOUNT_A_AMOUNT = 100000;
     public static final long ACCOUNT_B_AMOUNT = 300000;
-    private Account accountA = new Account("A", ACCOUNT_A_AMOUNT);
-    private Account accountB = new Account("B", ACCOUNT_B_AMOUNT);
+    private AccountLocks accountA = new AccountLocks("A", ACCOUNT_A_AMOUNT);
+    private AccountLocks accountB = new AccountLocks("B", ACCOUNT_B_AMOUNT);
 
-    public Account getAccountA() {
+    public AccountLocks getAccountA() {
         return accountA;
     }
 
-    public Account getAccountB() {
+    public AccountLocks getAccountB() {
         return accountB;
     }
 
-    public boolean transferAmountInCents(long amount, Account from, Account to) {
+    public boolean transferAmountInCents(long amount, AccountLocks from, AccountLocks to) {
         if (from.getId().compareTo(to.getId()) < 0) {
             from.getLock().lock();
             try {
