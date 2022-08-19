@@ -15,7 +15,7 @@ public class RandomAccessDemo {
                         try {
                             f.writeDouble(r);
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            throw new RuntimeException(e);
                         }
                     });
             f.seek(4 * 8); // go to 5-th record

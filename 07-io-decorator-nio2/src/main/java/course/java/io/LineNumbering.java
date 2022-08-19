@@ -6,7 +6,7 @@ public class LineNumbering {
     public static void main(String[] args) {
         int n = 0;
         try (var in = new BufferedReader(
-                new FileReader("./src/course/demos/io/LineNumbering.java"));
+                new FileReader("./src/main/java/course/java/io/LineNumbering.java"));
              var out = new PrintWriter(
                      new BufferedWriter(
                              new FileWriter("out.txt")))
