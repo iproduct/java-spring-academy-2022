@@ -36,7 +36,9 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public Article getArticleById(Long id) throws NonexistingEntityException {
-        return null;
+        return articleRepo.findById(id).orElseThrow(() -> new NonexistingEntityException(
+                String.format("Post with ID='%d' does not exist", id)
+        ));
     }
 
     /**
