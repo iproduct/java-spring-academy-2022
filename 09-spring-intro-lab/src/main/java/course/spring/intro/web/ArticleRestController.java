@@ -45,4 +45,10 @@ public class ArticleRestController {
         return articleService.update(article);
     }
 
+    @DeleteMapping("/{id}")
+    public Article deleteArticleById(@PathVariable("id") Long id) {
+        return articleService.deleteArticleById(id);
+    }
+
+
 }

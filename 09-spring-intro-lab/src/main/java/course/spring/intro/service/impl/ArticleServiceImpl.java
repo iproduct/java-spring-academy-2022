@@ -2,11 +2,13 @@ package course.spring.intro.service.impl;
 
 import course.spring.intro.dao.ArticleRepository;
 import course.spring.intro.entity.Article;
+import course.spring.intro.exception.InvalidEntityDataException;
 import course.spring.intro.exception.NonexistingEntityException;
 import course.spring.intro.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -56,8 +58,16 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public Article update(Article article) throws NonexistingEntityException {
-        return null;
+    public Article update(Article article) throws NonexistingEntityException, InvalidEntityDataException {
+        var old = getArticleById(article.getId());
+        if (!old.getAuthor().equals(article.getAuthor())) {
+            throw new InvalidEntityDataException(
+                    String.format("Post author can not be changed from '%s' to '%s'",
+                            old.getAuthor(), article.getAuthor()));
+        }
+        article.setCreated(old.getCreated());
+        article.setModified(LocalDateTime.now());
+        return articleRepo.save(article);
     }
 
     /**
@@ -66,7 +76,9 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public Article deleteArticleById(Long id) throws NonexistingEntityException {
-        return null;
+        var old = getArticleById(id);
+        articleRepo.deleteById(id);
+        return old;
     }
 
     /**
@@ -74,6 +86,6 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public long getArticlesCount() {
-        return 0;
+        return articleRepo.count();
     }
 }

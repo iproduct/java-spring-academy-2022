@@ -1,6 +1,7 @@
 package course.spring.intro.service;
 
 import course.spring.intro.entity.Article;
+import course.spring.intro.exception.InvalidEntityDataException;
 import course.spring.intro.exception.NonexistingEntityException;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface ArticleService {
      */
     Article getArticleById(Long id) throws NonexistingEntityException;
     Article create(Article article);
-    Article update(Article article) throws NonexistingEntityException;
+    Article update(Article article) throws NonexistingEntityException, InvalidEntityDataException;
     Article deleteArticleById(Long id) throws NonexistingEntityException;
     long getArticlesCount();
 }
