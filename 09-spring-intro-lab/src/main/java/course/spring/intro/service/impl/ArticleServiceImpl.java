@@ -50,6 +50,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article create(Article article) {
         article.setId(null);
+        var now = LocalDateTime.now();
+        article.setCreated(now);
+        article.setModified(now);
         return articleRepo.save(article);
     }
 

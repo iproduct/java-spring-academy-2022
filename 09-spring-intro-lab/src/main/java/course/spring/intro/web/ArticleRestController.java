@@ -4,12 +4,17 @@ import course.spring.intro.entity.Article;
 import course.spring.intro.exception.InvalidEntityDataException;
 import course.spring.intro.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
+
+import static course.spring.intro.utils.ErrorHandlingUtils.handleValidationErrors;
+
 
 @RestController
 @RequestMapping("/api/articles")
@@ -22,13 +27,15 @@ public class ArticleRestController {
         return articleService.getAllArticles();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id:\\d+}")
     public Article getArticleById(@PathVariable("id") Long id) {
         return articleService.getArticleById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Article> addNewArticle(@RequestBody Article article) {
+    public ResponseEntity<Article> addNewArticle(@Valid @RequestBody Article article, Errors errors) {
+        handleValidationErrors(errors);
+
         var created = articleService.create(article);
         return ResponseEntity.created(
                 ServletUriComponentsBuilder.fromCurrentRequest().pathSegment("{id}")
@@ -36,8 +43,12 @@ public class ArticleRestController {
         ).body(created);
     }
 
+
+
     @PutMapping("/{id}")
-    public Article updateAticle(@PathVariable("id") Long id, @RequestBody Article article) {
+    public Article updateAticle(@PathVariable("id") Long id, @Valid @RequestBody Article article, Errors errors) {
+        handleValidationErrors(errors);
+
         if(!id.equals(article.getId())) {
             throw new InvalidEntityDataException(
                     String.format("ID in URL='%d' is different from ID in message body = '%d'", id, article.getId()));
@@ -49,6 +60,12 @@ public class ArticleRestController {
     public Article deleteArticleById(@PathVariable("id") Long id) {
         return articleService.deleteArticleById(id);
     }
+
+    @GetMapping(value = "/count", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String getArticlsCount() {
+        return Long.toString(articleService.getArticlesCount());
+    }
+
 
 
 }
