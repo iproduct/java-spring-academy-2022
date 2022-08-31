@@ -3,11 +3,13 @@ package course.spring.service;
 import course.spring.model.Article;
 import course.spring.qualifiers.Mock;
 import course.spring.service.ArticleProvider;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Primary
 @Mock
 @Service("mockProvider")
 @Order(1)

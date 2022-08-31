@@ -30,7 +30,7 @@ public class ConsoleArticlePresenter implements Presenter {
 
 
 //    @Resource(name="fromProps")
-    @Inject @RepositoryBacked
+    @Inject
     public void setProvider(ArticleProvider provider) {
         this.provider = provider;
     }

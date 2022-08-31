@@ -5,6 +5,8 @@ import course.spring.qualifiers.FromProps;
 import course.spring.service.ArticleProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
@@ -40,6 +42,7 @@ public class AricleProviderFromProps implements ArticleProvider {
 
     @PostConstruct
     private void init() {
+
         String titlesStr = environment.getProperty("blog.titles");
         articlesCount = Integer.parseInt(environment.getProperty("blog.articles.count"));
         titles = titlesStr.split(",[\\s]*");
