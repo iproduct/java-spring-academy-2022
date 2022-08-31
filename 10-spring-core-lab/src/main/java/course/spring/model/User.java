@@ -1,5 +1,6 @@
 package course.spring.model;
 
+import course.spring.dao.Identifiable;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class User {
+public class User implements Identifiable<Long> {
     @EqualsAndHashCode.Include
     private Long id;
     @NonNull

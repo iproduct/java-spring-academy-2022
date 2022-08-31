@@ -1,5 +1,7 @@
 package course.spring.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +14,7 @@ public class RepositoryMemoryImpl<V extends Identifiable<K>, K> implements Repos
 
     public RepositoryMemoryImpl() {
     }
+
     public RepositoryMemoryImpl(IdGenerator<K> idGenerator) {
         this.idGenerator = idGenerator;
     }

@@ -1,4 +1,4 @@
-package course.spring.dao;
+package course.spring.service;
 
 import course.spring.model.Article;
 

@@ -1,38 +1,39 @@
 package course.spring.service;
 
-import course.spring.dao.ArticleProvider;
+import course.spring.qualifiers.FromProps;
+import course.spring.qualifiers.RepositoryBacked;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
-@Service
+import javax.inject.Inject;
+
+@Service("articlePresenter")
 @Slf4j
 public class ConsoleArticlePresenter implements Presenter {
     private ApplicationContext ctx;
     private ArticleProvider provider;
+//    private List<ArticleProvider> providers;
 
-    @Autowired
-    void config(ApplicationContext ctx, @Qualifier("repoProvider") ArticleProvider provider) {
-        this.ctx = ctx;
+//    @Inject
+//    void config(ApplicationContext ctx, @Mock ArticleProvider provider) {
+//        this.ctx = ctx;
+//        this.provider = provider;
+//        log.info("Method based injection with two injected arguments: {} and {}", ctx, provider);
+//    }
+
+
+//    @Autowired
+//    public ConsoleArticlePresenter(List<ArticleProvider> providers) {
+//        this.providers = providers;
+//    }
+
+
+//    @Resource(name="fromProps")
+    @Inject @RepositoryBacked
+    public void setProvider(ArticleProvider provider) {
         this.provider = provider;
-        log.info("Method based injection with two injected arguments: {} and {}", ctx, provider);
     }
-
-
-//    @Autowired
-//    public ConsoleArticlePresenter(ArticleProvider provider) {
-//        this.provider = provider;
-//    }
-
-
-//    @Autowired
-//    public void setProvider(ArticleProvider provider) {
-//        this.provider = provider;
-//    }
 
 //    @Override
 //    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -43,6 +44,9 @@ public class ConsoleArticlePresenter implements Presenter {
     public void present() {
 //        var provider = ctx.getBean(ArticleProvider.class);
         provider.getArticles().forEach(System.out::println);
+//        providers.stream()
+//                .flatMap(provider -> provider.getArticles().stream())
+//                .forEach(System.out::println);
     }
 
 }

@@ -1,16 +1,27 @@
-package course.spring.dao;
+package course.spring.service;
 
+import course.spring.dao.ArticleRepository;
 import course.spring.model.Article;
+import course.spring.qualifiers.RepositoryBacked;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository("repoProvider")
-public class ArticleProviderRepositoryImpl extends RepositoryMemoryImpl<Article, Long>
-        implements ArticleProvider {
+@RepositoryBacked
+@Service("repoProvider")
+@Order(2)
+public class ArticleProviderRepositoryImpl implements ArticleProvider {
+    private ArticleRepository articleRepo;
+
+    @Autowired
+    public ArticleProviderRepositoryImpl(ArticleRepository articleRepo) {
+        this.articleRepo = articleRepo;
+    }
+
     public static final List<Article> REPO_DEFAULT_ARTICLES = List.of(
             new Article("Spring Data JPA Intro", "Spring Data JPA is easy ...",
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIyNvtJKwI_s4BqG7jh-g2Y4xa1mTAwLCHysTl42sZ2w&s",
@@ -25,17 +36,17 @@ public class ArticleProviderRepositoryImpl extends RepositoryMemoryImpl<Article,
 
     @PostConstruct
     public void init() {
-        REPO_DEFAULT_ARTICLES.forEach(this::create);
+        REPO_DEFAULT_ARTICLES.forEach(articleRepo::create);
     }
 
-    @Autowired
-    @Override
-    public void setIdGenerator(IdGenerator<Long> idGenerator) {
-        super.setIdGenerator(idGenerator);
-    }
+//    @Autowired
+//    @Override
+//    public void setIdGenerator(IdGenerator<Long> idGenerator) {
+//        articleRepo.setIdGenerator(idGenerator);
+//    }
 
     @Override
     public List<Article> getArticles() {
-        return new ArrayList<>(findAll());
+        return new ArrayList<>(articleRepo.findAll());
     }
 }
