@@ -19,33 +19,33 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@FromProps
-@Service("fromProps")
-@PropertySource("blog.properties")
-@Order(3)
+//@FromProps
+//@Service("fromProps")
+//@PropertySource("blog.properties")
+//@Order(3)
 @Slf4j
 public class AricleProviderFromProps implements ArticleProvider {
-//    @Value("${blog.titles}")
+    @Value("${blog.titles}")
     private String[] titles;
 
-    private Environment environment;
+//    private Environment environment;
 
-    @Autowired
-    public AricleProviderFromProps(Environment environment) {
-        this.environment = environment;
-    }
+//    @Autowired
+//    public AricleProviderFromProps(Environment environment) {
+//        this.environment = environment;
+//    }
 
 //    @Value("${blog.articles.count}")
     private int articlesCount;
 
     private List<Article> articles;
 
-    @PostConstruct
+//    @PostConstruct
     private void init() {
 
-        String titlesStr = environment.getProperty("blog.titles");
-        articlesCount = Integer.parseInt(environment.getProperty("blog.articles.count"));
-        titles = titlesStr.split(",[\\s]*");
+//        String titlesStr = environment.getProperty("blog.titles");
+//        articlesCount = Integer.parseInt(environment.getProperty("blog.articles.count"));
+//        titles = titlesStr.split(",[\\s]*");
         articles = Arrays.stream(titles).map(title ->
                 new Article(title, title + " content ...",
                         "http://myblogs.com/" + URLEncoder.encode(title), List.of(), "Trayan Iliev"))

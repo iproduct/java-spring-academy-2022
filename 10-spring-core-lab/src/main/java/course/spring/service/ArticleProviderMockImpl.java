@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Primary
-@Mock
-@Service("mockProvider")
-@Order(1)
+//@Primary
+//@Mock
+//@Service("mockProvider")
+//@Order(1)
 public class ArticleProviderMockImpl implements ArticleProvider {
     public static final List<Article> MOCK_ARTICLES = List.of(
             new Article("Intro to Spring", "Spring MVC is easy ...",

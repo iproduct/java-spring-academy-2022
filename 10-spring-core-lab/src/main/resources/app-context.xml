@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:annotation-config />
+    <context:component-scan base-package="course.spring" />
+    <bean id="idGenerator" class="course.spring.dao.LongIdGenerator" scope="prototype" />
+    <bean id="mockArticleProvider" class="course.spring.service.ArticleProviderMockImpl"/>
+    <bean id="articleRepository" class="course.spring.dao.ArticleRepositoryImpl">
+        <constructor-arg ref="idGenerator" />
+    </bean>
+    <bean id="repoArticleProvider" class="course.spring.service.ArticleProviderRepositoryImpl"
+          c:_0-ref="articleRepository" init-method="init"/>
+    <bean id="articlePresenterFactory" class="course.spring.service.ArticlePresenterFactory"
+          c:provider-ref="repoArticleProvider" />
+    <bean id="articlePresenter" class="course.spring.service.ConsoleArticlePresenter"
+          p:provider-ref="repoArticleProvider" />
+
+<!--          factory-bean="articlePresenterFactory"-->
+<!--          factory-method="createArticlePresenter" />-->
+<!--        <constructor-arg index="0" name="provider" type="course.spring.service.ArticleProvider">-->
+<!--            <ref bean="repoArticleProvider"/>-->
+<!--        </constructor-arg>-->
+</beans>

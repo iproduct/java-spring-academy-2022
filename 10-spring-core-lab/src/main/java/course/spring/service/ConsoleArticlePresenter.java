@@ -7,11 +7,18 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.List;
 
-@Service("articlePresenter")
+//@Service("articlePresenter")
 @Slf4j
 public class ConsoleArticlePresenter implements Presenter {
     private ApplicationContext ctx;
+
+    public static Presenter createArticlePresenter(ArticleProvider provider) {
+        log.info("Creating ConsoleArticlePresenter using factory method.");
+        return new ConsoleArticlePresenter(provider);
+    }
+
     private ArticleProvider provider;
 //    private List<ArticleProvider> providers;
 
@@ -29,8 +36,16 @@ public class ConsoleArticlePresenter implements Presenter {
 //    }
 
 
-//    @Resource(name="fromProps")
-    @Inject
+    public ConsoleArticlePresenter() {
+    }
+
+    public ConsoleArticlePresenter(ArticleProvider provider) {
+        this.provider = provider;
+    }
+
+
+    //    @Resource(name="fromProps")
+//    @Inject
     public void setProvider(ArticleProvider provider) {
         this.provider = provider;
     }

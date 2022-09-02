@@ -1,6 +1,7 @@
 package course.spring.dao;
 
 import course.spring.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -8,6 +9,7 @@ import java.util.Optional;
 @Repository
 public class UserRepositoryImpl extends RepositoryMemoryImpl<User, Long>
         implements UserRepository {
+    @Autowired
     public UserRepositoryImpl(IdGenerator<Long> idGenerator) {
         super(idGenerator);
     }

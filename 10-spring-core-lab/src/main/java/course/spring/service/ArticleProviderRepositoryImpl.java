@@ -11,13 +11,13 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
-@RepositoryBacked
-@Service("repoProvider")
-@Order(2)
+//@RepositoryBacked
+//@Service("repoProvider")
+//@Order(2)
 public class ArticleProviderRepositoryImpl implements ArticleProvider {
     private ArticleRepository articleRepo;
 
-    @Autowired
+//    @Autowired
     public ArticleProviderRepositoryImpl(ArticleRepository articleRepo) {
         this.articleRepo = articleRepo;
     }
@@ -34,7 +34,7 @@ public class ArticleProviderRepositoryImpl implements ArticleProvider {
                     List.of("spring", "data", "reactive"), "Ivan Petrov")
     );
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
         REPO_DEFAULT_ARTICLES.forEach(articleRepo::create);
     }
