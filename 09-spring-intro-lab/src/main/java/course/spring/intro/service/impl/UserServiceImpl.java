@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Long id) throws NonexistingEntityException {
         return userRepo.findById(id).orElseThrow(() -> new NonexistingEntityException(
-                String.format("Post with ID='%d' does not exist", id)
+                String.format("User with ID='%d' does not exist", id)
         ));
     }
 

@@ -3,10 +3,7 @@ package course.spring.blogs.entity;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
@@ -39,6 +36,7 @@ public class User {
     @Size(min=8)
     @NonNull
     private String password;
+    @Enumerated(EnumType.STRING)
     private Role role = Role.READER;
     @URL
     private String imageUrl;
