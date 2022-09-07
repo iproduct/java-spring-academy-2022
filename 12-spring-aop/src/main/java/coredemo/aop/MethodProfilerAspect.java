@@ -15,10 +15,10 @@ import java.util.concurrent.TimeUnit;
 
 @Aspect
 @Order(2)
-//@Component
-//@Slf4j
+@Component
+@Slf4j
 public class MethodProfilerAspect {
-    final static Logger log = LoggerFactory.getLogger(MethodProfilerAspect.class);
+//    final static Logger log = LoggerFactory.getLogger(MethodProfilerAspect.class);
 
 //    @Pointcut("@within(org.springframework.stereotype.Repository)")
 //    public void repositoryClassMethods() {

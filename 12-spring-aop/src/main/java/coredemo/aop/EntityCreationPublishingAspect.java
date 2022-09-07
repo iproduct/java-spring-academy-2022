@@ -19,12 +19,12 @@ import org.springframework.stereotype.Component;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//@Component
+@Component
 @Aspect
-public class EntityCreationPublishingAspect implements  ApplicationContextAware{
+public class EntityCreationPublishingAspect implements  ApplicationContextAware {
     final static Logger log = LoggerFactory.getLogger(EntityCreationPublishingAspect.class);
 
-    @Autowired
+//    @Autowired
     private ApplicationEventPublisher eventPublisher;
 
     @Pointcut("@target(org.springframework.stereotype.Repository)")
@@ -41,15 +41,16 @@ public class EntityCreationPublishingAspect implements  ApplicationContextAware{
 
     @AfterReturning(value = "entityCreationMethods(article)", returning = "retVal")
     public void logMethodCall(JoinPoint jp, Article article, Object retVal) {
-        Pattern p = Pattern.compile("[^.]+$");
+//        Pattern p = Pattern.compile("[^.]+$");
 //        Matcher m = p.matcher(jp.getArgs()[0].getClass().getName());
-        Matcher m = p.matcher(article.getClass().getName());
-        String entityName = m.find() ? m.group(): "";
+//        Matcher m = p.matcher(article.getClass().getName());
+//        String entityName = m.find() ? m.group(): "";
+        String entityName = article.getClass().getSimpleName();
 
-        log.info(eventPublisher + "");
+//        log.info(eventPublisher + "");
         if(eventPublisher != null) {
             eventPublisher.publishEvent(
-                    new EntityCreationEvent(this, entityName, retVal));
+                    new EntityCreationEvent(jp.getThis(), entityName, retVal));
         }
     }
 
