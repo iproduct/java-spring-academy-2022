@@ -7,9 +7,9 @@ POST http://localhost:8080/api/articles
 Content-Type: application/json
 
 {
-  "title": "Spring Boot 2",
-  "content": "Spring Boot 2 content ...",
-  "tags": "spring, boot",
+  "title": "Spring Article 5",
+  "content": "Spring Article 5 content ...",
+  "tags": "spring",
   "imageUrl": "https://www.publicdomainpictures.net/pictures/20000/velka/deep-purple-flowers-in-a-pot.jpg",
   "author": "Trayan Iliev"
 }

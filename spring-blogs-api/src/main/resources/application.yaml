@@ -59,7 +59,8 @@ logging:
   level:
     root: INFO
     course:
-      java: DEBUG
+      spring:
+        blogs: DEBUG
     org:
       springframework:
         test:
