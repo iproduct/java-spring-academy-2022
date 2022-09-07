@@ -32,7 +32,8 @@ public class SpelDemo {
 
         ExpressionParser expressionParser = new SpelExpressionParser(config);
 
-        double value = expressionParser.parseExpression("((42 div 5) % 3 + 1) * 10").getValue(Double.class);
+        double value = expressionParser.parseExpression("((42 div 5) % 3 + 1) * 10")
+                .getValue(Double.class);
         System.out.println(value);
 
         StandardEvaluationContext context = new StandardEvaluationContext();
@@ -46,7 +47,7 @@ public class SpelDemo {
                 "'valid alphabetic string' matches '[a-zA-Z\\s]+'");
         Boolean result = expression.getValue(Boolean.class);
         System.out.println(result);
-
+//
         String result2 = expressionParser.parseExpression(
                         "@beanA.beanB.message ?: 'default message'")
                 .getValue(context, String.class);
@@ -86,7 +87,7 @@ public class SpelDemo {
         // #this
         List<Integer> primes = new ArrayList<Integer>();
         primes.addAll(Arrays.asList(2,3,5,7,11,13,17));
-//
+
         carParkContext.setVariable("primes", primes);
         List<Integer> result5 = expressionParser.parseExpression(
                 "#primes.?[#this > 4]")
@@ -102,8 +103,9 @@ public class SpelDemo {
                     "{name:{first:'Isac',last:'Newton'},dob:{day:10,month:'July',year:1756}}" +
                 "}");
 
-        List listOfMaps = (List) teslaExpr.getValue(context4);
+        List<Map> listOfMaps = (List) teslaExpr.getValue(context4);
         System.out.println(listOfMaps);
+        System.out.println(listOfMaps.get(0).getClass().getName());
         context4.setVariable("names", listOfMaps);
 //        EvaluationContext context6 = new StandardEvaluationContext(listOfMaps);
         Expression exp4 = expressionParser.parseExpression(

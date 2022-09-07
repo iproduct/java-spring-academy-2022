@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 @Aspect
 @Order(2)
-@Component
+//@Component
 //@Slf4j
 public class MethodProfilerAspect {
     final static Logger log = LoggerFactory.getLogger(MethodProfilerAspect.class);

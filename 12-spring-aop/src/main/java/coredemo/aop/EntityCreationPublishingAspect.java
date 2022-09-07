@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Component
+//@Component
 @Aspect
 public class EntityCreationPublishingAspect implements  ApplicationContextAware{
     final static Logger log = LoggerFactory.getLogger(EntityCreationPublishingAspect.class);
