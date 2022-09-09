@@ -6,6 +6,7 @@ import course.spring.blogs.entity.User;
 import course.spring.blogs.exception.InvalidEntityDataException;
 import course.spring.blogs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -54,7 +55,8 @@ public class UserServiceImpl implements UserService {
             throw new InvalidEntityDataException(
                     String.format("User with username '%s' already exists", user.getUsername()));
         }
-        // TODO hash the password
+        var encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
         var now = LocalDateTime.now();
         user.setCreated(now);
         user.setModified(now);

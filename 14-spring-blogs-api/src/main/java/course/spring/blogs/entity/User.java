@@ -1,5 +1,6 @@
 package course.spring.blogs.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
 
@@ -35,6 +36,7 @@ public class User {
     @NotNull
     @Size(min=8)
     @NonNull
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role = Role.READER;

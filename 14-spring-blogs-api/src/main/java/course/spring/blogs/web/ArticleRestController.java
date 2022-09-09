@@ -42,8 +42,6 @@ public class ArticleRestController {
         ).body(created);
     }
 
-
-
     @PutMapping("/{id}")
     public Article updateAticle(@PathVariable("id") Long id, @Valid @RequestBody Article article, Errors errors) {
         ErrorHandlingUtils.handleValidationErrors(errors);
