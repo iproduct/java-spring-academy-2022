@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/hello")
 public class HelloRestController {
     @GetMapping("/{name}")
-    public String sayHelloNamePath(@PathVariable String name){
+    public String sayHelloNamePath(@PathVariable String name ){
         return String.format("<h1>Hello %s, from Spring REST Service, using @PathVariable!!!<h1>",
                 name);
     }
