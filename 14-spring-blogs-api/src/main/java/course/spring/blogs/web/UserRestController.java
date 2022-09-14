@@ -1,5 +1,6 @@
 package course.spring.blogs.web;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import course.spring.blogs.entity.User;
 import course.spring.blogs.exception.InvalidEntityDataException;
 import course.spring.blogs.service.UserService;
@@ -18,6 +19,7 @@ import static course.spring.blogs.utils.ErrorHandlingUtils.handleValidationError
 @RestController
 @RequestMapping("/api/users")
 public class UserRestController {
+
     @Autowired
     private UserService userService;
 

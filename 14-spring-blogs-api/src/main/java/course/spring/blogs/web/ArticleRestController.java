@@ -5,6 +5,7 @@ import course.spring.blogs.exception.InvalidEntityDataException;
 import course.spring.blogs.service.ArticleService;
 import course.spring.blogs.utils.ErrorHandlingUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;

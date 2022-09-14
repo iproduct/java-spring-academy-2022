@@ -20,6 +20,7 @@ public interface UserService {
      * @throws NonexistingEntityException when the User with given ID does not exist
      */
     User getUserById(Long id) throws NonexistingEntityException;
+    User getUserByUsername(String username) throws NonexistingEntityException;
     User create(User user) throws InvalidEntityDataException;
     User update(User user) throws NonexistingEntityException, InvalidEntityDataException;
     User deleteUserById(Long id) throws NonexistingEntityException;

@@ -44,6 +44,13 @@ public class UserServiceImpl implements UserService {
         ));
     }
 
+    @Override
+    public User getUserByUsername(String username) throws NonexistingEntityException {
+        return userRepo.findByUsername(username).orElseThrow(() -> new NonexistingEntityException(
+                String.format("Post with username = '%s' does not exist", username)
+        ));
+    }
+
     /**
      * @param user
      * @return
