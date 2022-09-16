@@ -1,0 +1,61 @@
+package course.spring.blogs.entity;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
+import org.hibernate.validator.constraints.URL;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Entity
+@Data
+@NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    private Long id;
+    @NotNull
+    @Size(min=2, max=30)
+    @NonNull
+    private String firstName;
+    @NotNull
+    @Size(min=2, max=30)
+    @NonNull
+    private String lastName;
+    @NotNull
+    @Size(min=2, max=30)
+    @NonNull
+    private String username;
+    @NotNull
+    @Size(min=8)
+    @NonNull
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
+    @NonNull
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.READER;
+    @URL
+    private String imageUrl;
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+    private List<Article> articles = List.of();
+    @PastOrPresent
+    private LocalDateTime created = LocalDateTime.now();
+    @PastOrPresent
+    private LocalDateTime modified = LocalDateTime.now();
+
+    public User(@NonNull String firstName, @NonNull String lastName, @NonNull String username, @NonNull String password, @NonNull Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+}
