@@ -7,14 +7,18 @@ import course.spring.blogs.service.ArticleService;
 import course.spring.blogs.dao.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * ArticleService default implementation
  */
 @Service
+@Transactional
 public class ArticleServiceImpl implements ArticleService {
     private ArticleRepository articleRepo;
 
@@ -27,6 +31,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @return list all {@link Article} entities
      */
     @Override
+    @Transactional(readOnly = true)
     public List<Article> getAllArticles() {
         return articleRepo.findAll();
     }
@@ -37,6 +42,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @throws NonexistingEntityException when the Article with given ID does not exist
      */
     @Override
+    @Transactional(readOnly = true)
     public Article getArticleById(Long id) throws NonexistingEntityException {
         return articleRepo.findById(id).orElseThrow(() -> new NonexistingEntityException(
                 String.format("Post with ID='%d' does not exist", id)
@@ -48,6 +54,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Article create(Article article) {
         article.setId(null);
         var now = LocalDateTime.now();
@@ -55,6 +62,13 @@ public class ArticleServiceImpl implements ArticleService {
         article.setModified(now);
         return articleRepo.save(article);
     }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public List<Article> createBatch(List<Article> articles) {
+        return articles.stream().map(this::create).collect(Collectors.toList());
+    }
+
 
     /**
      * @param article
@@ -88,6 +102,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
+    @Transactional(readOnly = true)
     public long getArticlesCount() {
         return articleRepo.count();
     }

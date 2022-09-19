@@ -1,5 +1,6 @@
 package course.spring.blogs.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
@@ -45,6 +46,8 @@ public class User {
     @URL
     private String imageUrl;
     @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+    @ToString.Exclude
+    @JsonIgnore
     private List<Article> articles = List.of();
     @PastOrPresent
     private LocalDateTime created = LocalDateTime.now();

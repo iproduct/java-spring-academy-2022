@@ -11,6 +11,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -32,7 +34,7 @@ public class DataInitializer implements ApplicationRunner {
             new Article("Spring Data JPA and Hibernate",
                     "Hibernate provides powerful ORM implementation ...", "https://example.com/images/2",
                     Set.of("hibernate", "performance"), SAMPLE_USERS.get(1)),
-            new Article( "Spring Data is Going Reactive",
+            new Article( "Sp",
                     "Spring Data provides reactive db integrations for a number of databases ...",
                     "https://example.com/images/3",
                     Set.of("spring", "boot", "intro"), SAMPLE_USERS.get(1))
@@ -60,10 +62,12 @@ public class DataInitializer implements ApplicationRunner {
                 User defaultAuthor = userService.getUserByUsername("author");
                 SAMPLE_ARTICLES.forEach(art -> art.setAuthor(defaultAuthor));
                 defaultAuthor.getArticles().addAll(SAMPLE_ARTICLES);
-                SAMPLE_ARTICLES.forEach(articleService::create);
+                articleService.createBatch(SAMPLE_ARTICLES);
                 log.info("Sample articles created: {}", articleService.getAllArticles());
             } catch (EntityNotFoundException ex){
                 log.warn("Error creating sample articles: Dafault author could not be found.");
+            } catch (Exception ex) {
+                log.error("Error creating sample articles:", ex);
             }
         }
     }

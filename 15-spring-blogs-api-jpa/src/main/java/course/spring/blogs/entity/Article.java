@@ -32,7 +32,7 @@ public class Article {
     @NonNull
     private String imageUrl;
     @NonNull
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> tags;
     @NonNull
     @ManyToOne(optional = false)

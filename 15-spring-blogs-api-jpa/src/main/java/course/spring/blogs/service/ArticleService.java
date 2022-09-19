@@ -20,6 +20,7 @@ public interface ArticleService {
      */
     Article getArticleById(Long id) throws NonexistingEntityException;
     Article create(Article article);
+    List<Article> createBatch(List<Article> articles);
     Article update(Article article) throws NonexistingEntityException, InvalidEntityDataException;
     Article deleteArticleById(Long id) throws NonexistingEntityException;
     long getArticlesCount();

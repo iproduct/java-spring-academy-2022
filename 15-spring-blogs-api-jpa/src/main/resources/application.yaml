@@ -19,7 +19,7 @@ spring:
 #        generate_statistics: true
     #        metadata_builder_contributor: course.hibernate.spring.util.SqlFunctionsMetadataBuilderContributor
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     open-in-view: false
 
 #    mongodb:
@@ -67,8 +67,8 @@ logging:
           context:
             support: INFO
       hibernate:
-#        type: trace
-#        stat: debug
+        type: trace
+        stat: debug
 
 jwt:
   secret: ${JWT_SECRET:not_a_secret}
