@@ -1,6 +1,7 @@
 package course.spring.blogs.service.impl;
 
 import course.spring.blogs.entity.Article;
+import course.spring.blogs.events.ArticleCreatedEvent;
 import course.spring.blogs.exception.InvalidEntityDataException;
 import course.spring.blogs.exception.NonexistingEntityException;
 import course.spring.blogs.service.ArticleService;
@@ -15,6 +16,8 @@ import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -37,12 +40,17 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleRepository articleRepo;
     //    private TransactionTemplate template;
     private PlatformTransactionManager transactionManager;
+    private ApplicationEventPublisher publisher;
 
     @Autowired
-    public ArticleServiceImpl(ArticleRepository articleRepo, TransactionTemplate template, PlatformTransactionManager manager) {
+    public ArticleServiceImpl(ArticleRepository articleRepo,
+                              TransactionTemplate template,
+                              PlatformTransactionManager manager,
+                              ApplicationEventPublisher publisher) {
         this.articleRepo = articleRepo;
 //        this.template = template;
         this.transactionManager = manager;
+        this.publisher = publisher;
     }
 
     /**
@@ -78,7 +86,9 @@ public class ArticleServiceImpl implements ArticleService {
         var now = LocalDateTime.now();
         article.setCreated(now);
         article.setModified(now);
-        return articleRepo.save(article);
+        var created = articleRepo.save(article);
+        publisher.publishEvent(new ArticleCreatedEvent(created));
+        return created;
     }
 
 //    @Override
@@ -135,10 +145,10 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article update(Article article) throws NonexistingEntityException, InvalidEntityDataException {
         var old = getArticleById(article.getId());
-        if (!old.getAuthor().equals(article.getAuthor())) {
+        if (!old.getAuthors().equals(article.getAuthors())) {
             throw new InvalidEntityDataException(
                     String.format("Post author can not be changed from '%s' to '%s'",
-                            old.getAuthor(), article.getAuthor()));
+                            old.getAuthors(), article.getAuthors()));
         }
         article.setCreated(old.getCreated());
         article.setModified(LocalDateTime.now());
@@ -163,5 +173,14 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional(readOnly = true)
     public long getArticlesCount() {
         return articleRepo.count();
+    }
+
+    @TransactionalEventListener
+    public void handleArticleCreatedTransactionCommit(ArticleCreatedEvent event) {
+        log.info(">>>>> Transaction COMMIT for article: {}", event.article());
+    }
+    @TransactionalEventListener(phase= TransactionPhase.AFTER_ROLLBACK)
+    public void handleArticleCreatedTransactionRollback(ArticleCreatedEvent event) {
+        log.info(">>>>> Transaction ROLLBACK for article: {}", event.article());
     }
 }

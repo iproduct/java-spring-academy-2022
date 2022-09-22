@@ -30,14 +30,14 @@ public class DataInitializer implements ApplicationRunner {
     private static final List<Article> SAMPLE_ARTICLES = List.of(
             new Article("Spring Data JPA Intro",
                     "Spring Data JPA is easy ...", "https://example.com/images/1",
-                    Set.of("spring", "mvc", "boot", "intro"), SAMPLE_USERS.get(1)),
+                    Set.of("spring", "mvc", "boot", "intro"), List.of(SAMPLE_USERS.get(1))),
             new Article("Spring Data JPA and Hibernate",
                     "Hibernate provides powerful ORM implementation ...", "https://example.com/images/2",
-                    Set.of("hibernate", "performance"), SAMPLE_USERS.get(1)),
-            new Article( "Spring Data",
+                    Set.of("hibernate", "performance"), List.of(SAMPLE_USERS.get(1))),
+            new Article( "Spring Data Integrations",
                     "Spring Data provides reactive db integrations for a number of databases ...",
                     "https://example.com/images/3",
-                    Set.of("spring", "boot", "intro"), SAMPLE_USERS.get(1))
+                    Set.of("spring", "boot", "intro"), List.of(SAMPLE_USERS.get(1)))
     );
 
 
@@ -59,9 +59,9 @@ public class DataInitializer implements ApplicationRunner {
         }
         if(articleService.getArticlesCount() == 0) {
             try {
-                User defaultAuthor = userService.getUserByUsername("author");
-                SAMPLE_ARTICLES.forEach(art -> art.setAuthor(defaultAuthor));
-                defaultAuthor.getArticles().addAll(SAMPLE_ARTICLES);
+                var allAuthors = userService.getAllUsers();
+                SAMPLE_ARTICLES.forEach(art -> art.setAuthors(allAuthors));
+                allAuthors.forEach(author -> author.getArticles().addAll(SAMPLE_ARTICLES));
                 articleService.createBatch(SAMPLE_ARTICLES);
                 log.info("Sample articles created: {}", articleService.getAllArticles());
             } catch (EntityNotFoundException ex){

@@ -18,6 +18,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+//@Table(name="USERS", uniqueConstraints = {
+//        @UniqueConstraint(name="UC_USERNAME", columnNames={"USERNAME"}),
+//        @UniqueConstraint(name="UC_FIST_LAST_NAME", columnNames={"FIRST_NAME", "LAST_NAME"})
+//})
+@Table(name="USERS", indexes = {
+        @Index(name = "UC_USERNAME", columnList = "USERNAME", unique = true),
+        @Index(name = "UC_NAMES", columnList = "FIRST_NAME,LAST_NAME")
+})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +34,12 @@ public class User {
     @NotNull
     @Size(min=2, max=30)
     @NonNull
+    @Column(name="FIRST_NAME")
     private String firstName;
     @NotNull
     @Size(min=2, max=30)
     @NonNull
+    @Column(name="LAST_NAME")
     private String lastName;
     @NotNull
     @Size(min=2, max=30)
@@ -45,7 +55,7 @@ public class User {
     private Role role = Role.READER;
     @URL
     private String imageUrl;
-    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "authors")
     @ToString.Exclude
     @JsonIgnore
     private List<Article> articles = List.of();
