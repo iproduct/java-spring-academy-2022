@@ -32,22 +32,22 @@ public class Article {
     @NotNull
     @URL
     @NonNull
+    @Size(max=512)
     @Basic(optional = false)
-    @Column(name = "AVATAR_URL", nullable = false, length = 512, unique = true)
     private String imageUrl;
     @NonNull
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "TAGS")
     private Set<String> tags;
     @NonNull
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "article_user",
-            joinColumns = @JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID",
-                    foreignKey = @ForeignKey(name = "FK_ARTICLE")),
-            inverseJoinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID",
-                    foreignKey = @ForeignKey(name = "FK_USER")))
-//    @JoinColumn(name = "AUTHOR_ID", nullable = false)
-    private List<User> authors;
+    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinTable(name = "article_user",
+//            joinColumns = @JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID",
+//                    foreignKey = @ForeignKey(name = "FK_ARTICLE")),
+//            inverseJoinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID",
+//                    foreignKey = @ForeignKey(name = "FK_USER")))
+    @JoinColumn(name = "AUTHOR_ID", nullable = false)
+    private User author;
     @PastOrPresent
     private LocalDateTime created = LocalDateTime.now();
     @PastOrPresent

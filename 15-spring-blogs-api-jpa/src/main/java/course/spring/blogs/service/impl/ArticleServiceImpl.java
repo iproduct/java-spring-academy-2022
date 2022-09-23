@@ -1,6 +1,8 @@
 package course.spring.blogs.service.impl;
 
+import course.spring.blogs.dao.UserRepository;
 import course.spring.blogs.entity.Article;
+import course.spring.blogs.entity.User;
 import course.spring.blogs.events.ArticleCreatedEvent;
 import course.spring.blogs.exception.InvalidEntityDataException;
 import course.spring.blogs.exception.NonexistingEntityException;
@@ -22,6 +24,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import javax.annotation.PostConstruct;
 import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -41,9 +44,13 @@ public class ArticleServiceImpl implements ArticleService {
     //    private TransactionTemplate template;
     private PlatformTransactionManager transactionManager;
     private ApplicationEventPublisher publisher;
+    private UserRepository userRepo;
+
+    private User defaultAuthor;
 
     @Autowired
     public ArticleServiceImpl(ArticleRepository articleRepo,
+                              UserRepository userRepo,
                               TransactionTemplate template,
                               PlatformTransactionManager manager,
                               ApplicationEventPublisher publisher) {
@@ -51,6 +58,7 @@ public class ArticleServiceImpl implements ArticleService {
 //        this.template = template;
         this.transactionManager = manager;
         this.publisher = publisher;
+        this.userRepo = userRepo;
     }
 
     /**
@@ -83,6 +91,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Article create(Article article) {
         article.setId(null);
+        if(article.getAuthor() == null) { // TODO Get logged user as author from Spring Security
+            article.setAuthor(userRepo.findByUsername("author").orElse(null));
+        }
         var now = LocalDateTime.now();
         article.setCreated(now);
         article.setModified(now);
@@ -145,11 +156,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article update(Article article) throws NonexistingEntityException, InvalidEntityDataException {
         var old = getArticleById(article.getId());
-        if (!old.getAuthors().equals(article.getAuthors())) {
-            throw new InvalidEntityDataException(
-                    String.format("Post author can not be changed from '%s' to '%s'",
-                            old.getAuthors(), article.getAuthors()));
-        }
+        article.setAuthor(old.getAuthor());
         article.setCreated(old.getCreated());
         article.setModified(LocalDateTime.now());
         return articleRepo.save(article);

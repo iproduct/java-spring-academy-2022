@@ -55,7 +55,7 @@ public class User {
     private Role role = Role.READER;
     @URL
     private String imageUrl;
-    @ManyToMany(mappedBy = "authors")
+    @OneToMany(mappedBy = "author")
     @ToString.Exclude
     @JsonIgnore
     private List<Article> articles = List.of();

@@ -1,5 +1,9 @@
 package course.spring.blogs.web;
 
+import course.spring.blogs.dto.ArticleCreateDto;
+import course.spring.blogs.dto.ArticleDetailDto;
+import course.spring.blogs.dto.ArticleUpdateDto;
+import course.spring.blogs.dto.mapping.ArticleDtoMapper;
 import course.spring.blogs.entity.Article;
 import course.spring.blogs.exception.InvalidEntityDataException;
 import course.spring.blogs.service.ArticleService;
@@ -14,6 +18,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static course.spring.blogs.dto.mapping.ArticleDtoMapper.*;
 
 
 @RestController
@@ -23,35 +30,37 @@ public class ArticleRestController {
     private ArticleService articleService;
 
     @GetMapping
-    public List<Article> getAllArticles() {
-        return articleService.getAllArticles();
+    public List<ArticleDetailDto> getAllArticles() {
+        return articleService.getAllArticles().stream()
+                .map(ArticleDtoMapper::mapArticleToArticleDetailDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id:\\d+}")
-    public Article getArticleById(@PathVariable("id") Long id) {
-        return articleService.getArticleById(id);
+    public ArticleDetailDto getArticleById(@PathVariable("id") Long id) {
+        return mapArticleToArticleDetailDto(articleService.getArticleById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Article> addNewArticle(@Valid @RequestBody Article article, Errors errors) {
+    public ResponseEntity<ArticleDetailDto> addNewArticle(@Valid @RequestBody ArticleCreateDto articleDto, Errors errors) {
         ErrorHandlingUtils.handleValidationErrors(errors);
 
-        var created = articleService.create(article);
+        var created = articleService.create(mapArticleCreateDtoToArticle(articleDto));
         return ResponseEntity.created(
                 ServletUriComponentsBuilder.fromCurrentRequest().pathSegment("{id}")
                         .buildAndExpand(created.getId()).toUri()
-        ).body(created);
+        ).body(mapArticleToArticleDetailDto(created));
     }
 
     @PutMapping("/{id}")
-    public Article updateAticle(@PathVariable("id") Long id, @Valid @RequestBody Article article, Errors errors) {
+    public ArticleDetailDto updateAticle(@PathVariable("id") Long id, @Valid @RequestBody ArticleUpdateDto articleDto, Errors errors) {
         ErrorHandlingUtils.handleValidationErrors(errors);
 
-        if(!id.equals(article.getId())) {
+        if(!id.equals(articleDto.id())) {
             throw new InvalidEntityDataException(
-                    String.format("ID in URL='%d' is different from ID in message body = '%d'", id, article.getId()));
+                    String.format("ID in URL='%d' is different from ID in message body = '%d'", id, articleDto.id()));
         }
-        return articleService.update(article);
+        return mapArticleToArticleDetailDto(articleService.update(mapArticleUpdateDtoToArticle(articleDto)));
     }
 
     @DeleteMapping("/{id}")
