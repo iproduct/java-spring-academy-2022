@@ -56,9 +56,9 @@ public class AuthController {
     public LoginResponse login(@Valid @RequestBody Credentials credentials, Errors errors) {
         handleValidationErrors(errors);
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                credentials.getEmail(), credentials.getPassword()
+                credentials.getUsername(), credentials.getPassword()
         ));
-        final User user = userService.getUserByUsername(credentials.getEmail());
+        final User user = userService.getUserByUsername(credentials.getUsername());
         final String token = jwtUtils.generateToken(user);
         return new LoginResponse(token, user);
     }
