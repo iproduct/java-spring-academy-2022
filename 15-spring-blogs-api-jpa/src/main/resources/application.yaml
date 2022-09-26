@@ -68,8 +68,8 @@ logging:
           context:
             support: INFO
       hibernate:
-        type: trace
-        stat: debug
+#        type: trace
+#        stat: debug
 
 jwt:
   secret: ${JWT_SECRET:not_a_secret}
