@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -29,11 +30,11 @@ import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 import static course.spring.blogs.entity.Role.*;
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.*;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class SecurityConfig {
     @Autowired
     JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -44,11 +45,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .mvcMatchers(POST, "/api/auth/login").permitAll()
+                .mvcMatchers(POST, "/api/auth/login","/api/auth/register").permitAll()
                 .mvcMatchers(GET, "/swagger-ui", "/swagger-ui/**", "/swagger-resources/**", "/v2/**").permitAll()
                 .mvcMatchers(GET, "/api/articles").permitAll()
-                .mvcMatchers(GET, "/api/users", "api/users/**").hasRole(ADMIN.name())
+                .mvcMatchers(GET, "/api/users", "api/users/**").authenticated() //.hasRole(ADMIN.name())
+                .mvcMatchers("/api/users", "api/users/**").hasRole(ADMIN.name())
                 .mvcMatchers("/**").hasAnyRole(ADMIN.name(), AUTHOR.name(), READER.name())
+//                .mvcMatchers(GET,"/**").hasAnyRole(ADMIN.name(), AUTHOR.name(), READER.name())
+//                .mvcMatchers(POST, "/**").hasAnyRole(ADMIN.name(), AUTHOR.name())
+//                .mvcMatchers(PUT, "/**").hasAnyRole(ADMIN.name(), AUTHOR.name())
+//                .mvcMatchers(DELETE, "/**").hasAnyRole(ADMIN.name(), AUTHOR.name())
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

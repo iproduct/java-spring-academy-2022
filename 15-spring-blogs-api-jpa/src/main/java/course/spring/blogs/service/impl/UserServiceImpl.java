@@ -6,6 +6,7 @@ import course.spring.blogs.entity.User;
 import course.spring.blogs.exception.InvalidEntityDataException;
 import course.spring.blogs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,7 @@ public class UserServiceImpl implements UserService {
      * @return list all {@link User} entities
      */
     @Override
+    @PostFilter("filterObject.id == authentication.principal.id or hasRole('ADMIN')")
     public List<User> getAllUsers() {
         return userRepo.findAll();
     }

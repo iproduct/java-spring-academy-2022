@@ -5,18 +5,22 @@ import course.spring.blogs.dto.ArticleDetailDto;
 import course.spring.blogs.dto.ArticleUpdateDto;
 import course.spring.blogs.dto.mapping.ArticleDtoMapper;
 import course.spring.blogs.entity.Article;
+import course.spring.blogs.entity.User;
 import course.spring.blogs.exception.InvalidEntityDataException;
 import course.spring.blogs.service.ArticleService;
 import course.spring.blogs.utils.ErrorHandlingUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +29,7 @@ import static course.spring.blogs.dto.mapping.ArticleDtoMapper.*;
 
 @RestController
 @RequestMapping("/api/articles")
+@Slf4j
 public class ArticleRestController {
     @Autowired
     private ArticleService articleService;
@@ -42,8 +47,10 @@ public class ArticleRestController {
     }
 
     @PostMapping
-    public ResponseEntity<ArticleDetailDto> addNewArticle(@Valid @RequestBody ArticleCreateDto articleDto, Errors errors) {
+    public ResponseEntity<ArticleDetailDto> addNewArticle(@Valid @RequestBody ArticleCreateDto articleDto, Errors errors,
+                  Principal auth) {
         ErrorHandlingUtils.handleValidationErrors(errors);
+        log.info("Principal: {}", auth);
 
         var created = articleService.create(mapArticleCreateDtoToArticle(articleDto));
         return ResponseEntity.created(

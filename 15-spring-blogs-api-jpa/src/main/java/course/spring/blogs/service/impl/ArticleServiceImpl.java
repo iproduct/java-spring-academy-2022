@@ -11,6 +11,13 @@ import course.spring.blogs.dao.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
@@ -25,11 +32,14 @@ import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.security.RolesAllowed;
 import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static course.spring.blogs.dto.mapping.ArticleDtoMapper.mapArticleCreateDtoToArticle;
 import static org.springframework.transaction.TransactionDefinition.ISOLATION_REPEATABLE_READ;
 import static org.springframework.transaction.annotation.Isolation.REPEATABLE_READ;
 
@@ -40,11 +50,11 @@ import static org.springframework.transaction.annotation.Isolation.REPEATABLE_RE
 @Transactional
 @Slf4j
 public class ArticleServiceImpl implements ArticleService {
-    private ArticleRepository articleRepo;
+    private final ArticleRepository articleRepo;
     //    private TransactionTemplate template;
-    private PlatformTransactionManager transactionManager;
-    private ApplicationEventPublisher publisher;
-    private UserRepository userRepo;
+    private final PlatformTransactionManager transactionManager;
+    private final ApplicationEventPublisher publisher;
+    private final UserRepository userRepo;
 
     private User defaultAuthor;
 
@@ -89,10 +99,16 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
+//    @Secured({"ROLE_ADMIN", "ROLE_AUTHOR"})
+//    @RolesAllowed({"ADMIN", "AUTHOR"})
+    @PreAuthorize("hasAnyRole('ADMIN', 'AUTHOR')")
     public Article create(Article article) {
         article.setId(null);
-        if(article.getAuthor() == null) { // TODO Get logged user as author from Spring Security
-            article.setAuthor(userRepo.findByUsername("author").orElse(null));
+        if (article.getAuthor() == null) {
+            article.setAuthor(getLoggedUser());
+            if (article.getAuthor() == null) {
+                userRepo.findByUsername("author").orElse(null); // TODO throw exception if no signed-in user
+            }
         }
         var now = LocalDateTime.now();
         article.setCreated(now);
@@ -140,7 +156,7 @@ public class ArticleServiceImpl implements ArticleService {
         try {
             createdArticles = articles.stream().map(this::create).collect(Collectors.toList());
         } catch (ConstraintViolationException ex) {
-            log.error(">>> Constraint violation creating articles: " + articles.toString(), ex);
+            log.error(">>> Constraint violation creating articles: " + articles, ex);
             transactionManager.rollback(status);
             return createdArticles;
         }
@@ -186,8 +202,19 @@ public class ArticleServiceImpl implements ArticleService {
     public void handleArticleCreatedTransactionCommit(ArticleCreatedEvent event) {
         log.info(">>>>> Transaction COMMIT for article: {}", event.article());
     }
-    @TransactionalEventListener(phase= TransactionPhase.AFTER_ROLLBACK)
+
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_ROLLBACK)
     public void handleArticleCreatedTransactionRollback(ArticleCreatedEvent event) {
         log.info(">>>>> Transaction ROLLBACK for article: {}", event.article());
+    }
+
+    private User getLoggedUser() {
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        Object principal = authentication.getPrincipal();
+        if (principal instanceof User) {
+            return (User) principal;
+        }
+        return null;
     }
 }
