@@ -101,20 +101,26 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
 //    @Secured({"ROLE_ADMIN", "ROLE_AUTHOR"})
 //    @RolesAllowed({"ADMIN", "AUTHOR"})
-    @PreAuthorize("hasAnyRole('ADMIN', 'AUTHOR')")
+//    @PreAuthorize("hasAnyRole('ADMIN', 'AUTHOR')")
     public Article create(Article article) {
         article.setId(null);
         if (article.getAuthor() == null) {
-            article.setAuthor(getLoggedUser());
-            if (article.getAuthor() == null) {
-                userRepo.findByUsername("author").orElse(null); // TODO throw exception if no signed-in user
+            var loggedUser = getLoggedUser();
+            if (loggedUser != null) {
+                article.setAuthor(loggedUser);
             }
         }
+        if (article.getAuthor() == null) {
+            article.setAuthor(userRepo.findByUsername("author").orElse(null)); // TODO throw exception if no signed-in user
+        }
+
         var now = LocalDateTime.now();
         article.setCreated(now);
         article.setModified(now);
         var created = articleRepo.save(article);
-        publisher.publishEvent(new ArticleCreatedEvent(created));
+        publisher.publishEvent(new
+
+                ArticleCreatedEvent(created));
         return created;
     }
 
@@ -211,9 +217,11 @@ public class ArticleServiceImpl implements ArticleService {
     private User getLoggedUser() {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
-        Object principal = authentication.getPrincipal();
-        if (principal instanceof User) {
-            return (User) principal;
+        if (authentication != null) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof User) {
+                return (User) principal;
+            }
         }
         return null;
     }

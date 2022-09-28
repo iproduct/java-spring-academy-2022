@@ -81,42 +81,10 @@ public class SwaggerConfig {
         return SecurityContext.builder().securityReferences(defaultAuth()).build();
     }
 
-//    private SecurityContext securityContext() {
-//        return SecurityContext.builder()
-//                .securityReferences(
-//                        Arrays.asList(new SecurityReference("spring_jwt", scopes())))
-//                .forPaths(PathSelectors.regex("/api/users/.*"))
-//                .build();
-//    }
-
     private List<SecurityReference> defaultAuth() {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
         return Arrays.asList(new SecurityReference("JWT", authorizationScopes));
     }
-
-//    private SecurityScheme securityScheme() {
-//        GrantType grantType = new AuthorizationCodeGrantBuilder()
-//                .tokenEndpoint(new TokenEndpoint(AUTH_SERVER + "/login", "oauthtoken"))
-//                .tokenRequestEndpoint(
-//                        new TokenRequestEndpoint(AUTH_SERVER + "/authorize", CLIENT_ID, CLIENT_SECRET))
-//                .build();
-//
-//        SecurityScheme oauth = new OAuthBuilder().name("spring_jwt")
-//                .grantTypes(Arrays.asList(grantType))
-//                .scopes(Arrays.asList(scopes()))
-//                .build();
-//        return oauth;
-//    }
-//
-//    private AuthorizationScope[] scopes() {
-//        AuthorizationScope[] scopes = {
-//                new AuthorizationScope("read", "for read operations"),
-//                new AuthorizationScope("write", "for write operations"),
-//                new AuthorizationScope("foo", "Access foo API") };
-//        return scopes;
-//    }
-
-
 }

@@ -82,10 +82,10 @@ public class SecurityConfig {
         return strictHttpFirewall;
     }
 
-//    @Bean
-//    public WebSecurityCustomizer ignoringCustomizer() {
-//        return (web) -> web.ignoring().antMatchers("/**");
-//    }
+    @Bean
+    public WebSecurityCustomizer ignoringCustomizer() {
+        return (web) -> web.ignoring().antMatchers("/**");
+    }
 
     @Bean
     UserDetailsService userDetailsService(UserService userService){
