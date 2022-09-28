@@ -45,6 +45,7 @@ public class SecurityConfig {
         http.csrf().disable()
                 .authorizeRequests()
                 .mvcMatchers(POST, "/api/auth/login").permitAll()
+                .mvcMatchers(GET, "/swagger-ui", "/swagger-ui/**", "/swagger-resources/**", "/v2/**").permitAll()
                 .mvcMatchers(GET, "/api/articles").permitAll()
                 .mvcMatchers(GET, "/api/users", "api/users/**").hasRole(ADMIN.name())
                 .mvcMatchers("/**").hasAnyRole(ADMIN.name(), AUTHOR.name(), READER.name())
