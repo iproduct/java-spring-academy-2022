@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="TestNGSuite1" verbose="1" parallel="classes" data-provider-thread-count="12" thread-count="12" time-out="10000">
+    <test name="SimpleTests">
+        <groups>
+            <run>
+                <include name="fast" />
+                <include name="slow" />
+                <include name="stack.empty" />
+                <include name="stack.after.pushing" />
+            </run>
+        </groups>
+        <classes>
+            <class name="course.qa.simple.TestNGCalculatorTest" />
+            <class name="course.qa.simple.TestNGStack" />
+        </classes>
+    </test>
+</suite>

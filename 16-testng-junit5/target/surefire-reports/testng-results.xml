@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="9" passed="9" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-06-09T23:20:39 EEST" name="Surefire suite" finished-at="2022-06-09T23:20:39 EEST" duration-ms="48">
+    <groups>
+      <group name="fast">
+        <method signature="TestNGCalculatorTest.givenXandY_whenAdd_thenResultXplusY()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="givenXandY_whenAdd_thenResultXplusY" class="course.qa.simple.TestNGCalculatorTest"/>
+        <method signature="TestNGCalculatorTest.givenXandY_whenDivide_thenResultXdivY()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="givenXandY_whenDivide_thenResultXdivY" class="course.qa.simple.TestNGCalculatorTest"/>
+        <method signature="TestNGCalculatorTest.givenXandY_whenMultiply_thenResultXproductY()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="givenXandY_whenMultiply_thenResultXproductY" class="course.qa.simple.TestNGCalculatorTest"/>
+        <method signature="TestNGCalculatorTest.givenXandZeroDivider_whenDivide_thenArtithmeticExceptionThrown()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="givenXandZeroDivider_whenDivide_thenArtithmeticExceptionThrown" class="course.qa.simple.TestNGCalculatorTest"/>
+      </group> <!-- fast -->
+      <group name="slow">
+        <method signature="TestNGCalculatorTest.testGenerateBigPrime()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="testGenerateBigPrime" class="course.qa.simple.TestNGCalculatorTest"/>
+      </group> <!-- slow -->
+      <group name="stack.empty">
+        <method signature="TestNGStack.isEmpty()[pri:0, instance:course.qa.simple.TestNGStack@5136d012]" name="isEmpty" class="course.qa.simple.TestNGStack"/>
+        <method signature="TestNGStack.throwsExceptionWhenPoped()[pri:0, instance:course.qa.simple.TestNGStack@5136d012]" name="throwsExceptionWhenPoped" class="course.qa.simple.TestNGStack"/>
+      </group> <!-- stack.empty -->
+      <group name="failure">
+        <method signature="TestNGCalculatorTest.givenXandZeroDivider_whenDivide_thenArtithmeticExceptionThrown()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="givenXandZeroDivider_whenDivide_thenArtithmeticExceptionThrown" class="course.qa.simple.TestNGCalculatorTest"/>
+      </group> <!-- failure -->
+      <group name="success">
+        <method signature="TestNGCalculatorTest.givenXandY_whenAdd_thenResultXplusY()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="givenXandY_whenAdd_thenResultXplusY" class="course.qa.simple.TestNGCalculatorTest"/>
+        <method signature="TestNGCalculatorTest.givenXandY_whenDivide_thenResultXdivY()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="givenXandY_whenDivide_thenResultXdivY" class="course.qa.simple.TestNGCalculatorTest"/>
+        <method signature="TestNGCalculatorTest.givenXandY_whenMultiply_thenResultXproductY()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="givenXandY_whenMultiply_thenResultXproductY" class="course.qa.simple.TestNGCalculatorTest"/>
+        <method signature="TestNGCalculatorTest.testGenerateBigPrime()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="testGenerateBigPrime" class="course.qa.simple.TestNGCalculatorTest"/>
+      </group> <!-- success -->
+      <group name="stack.after.pushing">
+        <method signature="TestNGStack.isEmptyAfterPush()[pri:0, instance:course.qa.simple.TestNGStack@5136d012]" name="isEmptyAfterPush" class="course.qa.simple.TestNGStack"/>
+        <method signature="TestNGStack.returnsElementWhenPopedAfterPush()[pri:0, instance:course.qa.simple.TestNGStack@5136d012]" name="returnsElementWhenPopedAfterPush" class="course.qa.simple.TestNGStack"/>
+      </group> <!-- stack.after.pushing -->
+      <group name="simple">
+        <method signature="TestNGCalculatorTest.givenXandY_whenAdd_thenResultXplusY()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="givenXandY_whenAdd_thenResultXplusY" class="course.qa.simple.TestNGCalculatorTest"/>
+        <method signature="TestNGCalculatorTest.givenXandY_whenDivide_thenResultXdivY()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="givenXandY_whenDivide_thenResultXdivY" class="course.qa.simple.TestNGCalculatorTest"/>
+        <method signature="TestNGCalculatorTest.givenXandY_whenMultiply_thenResultXproductY()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="givenXandY_whenMultiply_thenResultXproductY" class="course.qa.simple.TestNGCalculatorTest"/>
+        <method signature="TestNGCalculatorTest.givenXandZeroDivider_whenDivide_thenArtithmeticExceptionThrown()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="givenXandZeroDivider_whenDivide_thenArtithmeticExceptionThrown" class="course.qa.simple.TestNGCalculatorTest"/>
+        <method signature="TestNGCalculatorTest.testGenerateBigPrime()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" name="testGenerateBigPrime" class="course.qa.simple.TestNGCalculatorTest"/>
+      </group> <!-- simple -->
+    </groups>
+    <test started-at="2022-06-09T23:20:39 EEST" name="Surefire test" finished-at="2022-06-09T23:20:39 EEST" duration-ms="48">
+      <class name="course.qa.simple.TestNGCalculatorTest">
+        <test-method is-config="true" signature="init()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="init" finished-at="2022-06-09T23:20:39 EEST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="setUp" finished-at="2022-06-09T23:20:39 EEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="givenXandY_whenAdd_thenResultXplusY()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="givenXandY_whenAdd_thenResultXplusY" finished-at="2022-06-09T23:20:39 EEST" duration-ms="3" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- givenXandY_whenAdd_thenResultXplusY -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="tearDown" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="setUp" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="givenXandY_whenDivide_thenResultXdivY()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="givenXandY_whenDivide_thenResultXdivY" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- givenXandY_whenDivide_thenResultXdivY -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="setUp" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="givenXandY_whenMultiply_thenResultXproductY()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="givenXandY_whenMultiply_thenResultXproductY" finished-at="2022-06-09T23:20:39 EEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- givenXandY_whenMultiply_thenResultXproductY -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="tearDown" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="tearDown" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method signature="givenXandZeroDivider_whenDivide_thenArtithmeticExceptionThrown()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="givenXandZeroDivider_whenDivide_thenArtithmeticExceptionThrown" finished-at="2022-06-09T23:20:39 EEST" duration-ms="1" status="PASS">
+          <exception class="java.lang.ArithmeticException">
+            <message>
+              <![CDATA[/ by zero]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.ArithmeticException: / by zero
+at course.qa.simple.Calculator.divide(Calculator.java:13)
+at course.qa.simple.TestNGCalculatorTest.givenXandZeroDivider_whenDivide_thenArtithmeticExceptionThrown(TestNGCalculatorTest.java:73)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:135)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:673)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:220)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:945)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:193)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:808)
+at org.testng.TestRunner.run(TestRunner.java:603)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:429)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:423)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:383)
+at org.testng.SuiteRunner.run(SuiteRunner.java:326)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1249)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1169)
+at org.testng.TestNG.runSuites(TestNG.java:1092)
+at org.testng.TestNG.run(TestNG.java:1060)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.ArithmeticException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- givenXandZeroDivider_whenDivide_thenArtithmeticExceptionThrown -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="setUp" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="tearDown" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method signature="testGenerateBigPrime()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="testGenerateBigPrime" finished-at="2022-06-09T23:20:39 EEST" duration-ms="4" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGenerateBigPrime -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="setUp" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="tearDown" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="destroy()[pri:0, instance:course.qa.simple.TestNGCalculatorTest@152aa092]" started-at="2022-06-09T23:20:39 EEST" name="destroy" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- destroy -->
+      </class> <!-- course.qa.simple.TestNGCalculatorTest -->
+      <class name="course.qa.simple.TestNGStack">
+        <test-method is-config="true" signature="createNewStack()[pri:0, instance:course.qa.simple.TestNGStack@5136d012]" started-at="2022-06-09T23:20:39 EEST" name="createNewStack" finished-at="2022-06-09T23:20:39 EEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNewStack -->
+        <test-method signature="isEmpty()[pri:0, instance:course.qa.simple.TestNGStack@5136d012]" started-at="2022-06-09T23:20:39 EEST" name="isEmpty" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- isEmpty -->
+        <test-method signature="isEmptyAfterPush()[pri:0, instance:course.qa.simple.TestNGStack@5136d012]" started-at="2022-06-09T23:20:39 EEST" name="isEmptyAfterPush" description="is no longer empty" finished-at="2022-06-09T23:20:39 EEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- isEmptyAfterPush -->
+        <test-method is-config="true" signature="createStackAndPush()[pri:0, instance:course.qa.simple.TestNGStack@5136d012]" started-at="2022-06-09T23:20:39 EEST" name="createStackAndPush" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createStackAndPush -->
+        <test-method signature="returnsElementWhenPopedAfterPush()[pri:0, instance:course.qa.simple.TestNGStack@5136d012]" started-at="2022-06-09T23:20:39 EEST" name="returnsElementWhenPopedAfterPush" description="returns element when poped" finished-at="2022-06-09T23:20:39 EEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- returnsElementWhenPopedAfterPush -->
+        <test-method is-config="true" signature="createStackAndPush()[pri:0, instance:course.qa.simple.TestNGStack@5136d012]" started-at="2022-06-09T23:20:39 EEST" name="createStackAndPush" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createStackAndPush -->
+        <test-method is-config="true" signature="createNewStack()[pri:0, instance:course.qa.simple.TestNGStack@5136d012]" started-at="2022-06-09T23:20:39 EEST" name="createNewStack" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNewStack -->
+        <test-method signature="throwsExceptionWhenPoped()[pri:0, instance:course.qa.simple.TestNGStack@5136d012]" started-at="2022-06-09T23:20:39 EEST" name="throwsExceptionWhenPoped" description="throws EmptyStackException when popped" finished-at="2022-06-09T23:20:39 EEST" duration-ms="0" status="PASS">
+          <exception class="java.util.EmptyStackException">
+            <full-stacktrace>
+              <![CDATA[java.util.EmptyStackException
+at java.base/java.util.Stack.peek(Stack.java:101)
+at java.base/java.util.Stack.pop(Stack.java:83)
+at course.qa.simple.TestNGStack.throwsExceptionWhenPoped(TestNGStack.java:33)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:135)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:673)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:220)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:945)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:193)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:808)
+at org.testng.TestRunner.run(TestRunner.java:603)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:429)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:423)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:383)
+at org.testng.SuiteRunner.run(SuiteRunner.java:326)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1249)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1169)
+at org.testng.TestNG.runSuites(TestNG.java:1092)
+at org.testng.TestNG.run(TestNG.java:1060)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.util.EmptyStackException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- throwsExceptionWhenPoped -->
+      </class> <!-- course.qa.simple.TestNGStack -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>

@@ -1,0 +1,38 @@
+[
+  {
+    "firstName": "Default",
+    "lastName": "Admin",
+    "age": 20,
+    "created": "2022-05-30T19:50:53.530849",
+    "modified": "2022-05-30T19:50:53.530849",
+    "username": "admin",
+    "password": "Admin123#",
+    "role": "READER",
+    "phone": null,
+    "active": true
+  },
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "age": 42,
+    "created": "2022-05-30T19:50:53.566029",
+    "modified": "2022-05-30T19:50:53.566029",
+    "username": "john",
+    "password": "John123#",
+    "role": "READER",
+    "phone": "+(1) 23424242323",
+    "active": true
+  },
+  {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "age": 34,
+    "created": "2022-05-30T19:50:53.575032",
+    "modified": "2022-05-30T19:50:53.575032",
+    "username": "jane",
+    "password": "Jane123#",
+    "role": "AUTHOR",
+    "phone": "+(359) 889654532",
+    "active": true
+  }
+]
