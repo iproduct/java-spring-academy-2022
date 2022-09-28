@@ -3,6 +3,7 @@ package course.qa.spring.web;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import course.qa.spring.dao.UserJpaRepository;
 import course.qa.spring.model.User;
 import lombok.extern.slf4j.Slf4j;
@@ -50,11 +51,12 @@ class UsersControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    ObjectMapper mapper;
+
+    ObjectMapper mapper = new ObjectMapper();;
 
     @BeforeEach
     void setUp() {
+        mapper.registerModule(new JavaTimeModule());
     }
 
     @AfterEach
